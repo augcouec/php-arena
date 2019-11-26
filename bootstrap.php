@@ -7,7 +7,6 @@ require_once('Map.php');
 require_once('Player.php');
 require_once('Bonuses/Armor.php');
 require_once('Bonuses/Potion.php');
-require_once('Decors/Rock.php');
 require_once('Enemies/Enemy.php');
 require_once('Enemies/Hunter.php');
 require_once('Enemies/Mage.php');

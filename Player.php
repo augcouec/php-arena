@@ -3,11 +3,14 @@
 class Player extends Item
 {
   private $previousLocation;
+  private $maximumHealthPoints = 300;
+  private $currentHealthPoints = 300;
+  private $armor = 0;
 
   function __construct(array $coords)
   {
     parent::__construct($coords);
-    $this->symbol = '█';
+    $this->symbol = '☻';
     $this->updatePreviousLocation();
   }
 
@@ -61,13 +64,32 @@ class Player extends Item
     ];
   }
 
-  private function setCoordX(int $x)
+  public function setArmor(int $armor)
   {
-    $this->x = $x;
+    $this->armor = $armor;
   }
 
-  private function setCoordY(int $y)
+  public function setHealthPoints(int $healthPoints)
   {
-    $this->y = $y;
+    $this->currentHealthPoints = $healthPoints;
+    if ($this->armor > 0) {
+      $this->currentHealthPoints += $this->armor;
+      $this->armor = 0;
+    }
+  }
+
+  public function getHealthPoints(): int
+  {
+    return $this->currentHealthPoints;
+  }
+
+  public function getMaximumHealthPoints(): int
+  {
+    return $this->maximumHealthPoints;
+  }
+
+  public function getArmor(): int
+  {
+    return $this->armor;
   }
 }

@@ -6,4 +6,9 @@ class Enemy extends Item
   {
     parent::__construct($location);
   }
+
+  public function interactWith(Player $player)
+  {
+    $player->setHealthPoints($player->getHealthPoints() - 30);
+  }
 }

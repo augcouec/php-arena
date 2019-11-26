@@ -4,7 +4,6 @@ class Game
 {
   const COLUMNS = 12;
   const ROWS = 15;
-  const ROCKS = 6;
   const ARMORS = 4;
   const POTIONS = 2;
   const ENEMIES_GROUPS = 3;
@@ -17,18 +16,15 @@ class Game
   {
     $this->askForStart();
     $this->initItems();
+    $this->displayPlayerHealthPoints();
     $this->initMap();
-    $movement = $this->askForMovement();
+    $this->askForMovement();
   }
 
   private function initItems()
   {
     $this->player = new Player([1, 1]);
     array_push($this->items, $this->player);
-
-    for ($i = 0; $i < self::ROCKS; $i++) {
-      array_push($this->items, new Rock($this->generateLocation()));
-    }
 
     for ($i = 0; $i < self::ARMORS; $i++) {
       array_push($this->items, new Armor($this->generateLocation()));
@@ -81,22 +77,57 @@ class Game
 
   public static function isLocationAllowed(array $location): bool
   {
-    var_dump($location);
     if (($location[0] > 0 && $location[0] < (self::ROWS - 3)) && ($location[1] > 0 && $location[1] < (self::COLUMNS + 3))) {
       return true;
     }
     return false;
   }
 
-  private function handleMovement($direction)
+  private function displayPlayerHealthPoints()
+  {
+    echo "HP : " . $this->player->getHealthPoints() . "/" . $this->player->getMaximumHealthPoints() . "\n";
+  }
+
+  private function displayPlayerArmor()
+  {
+    $armor = $this->player->getArmor();
+    if ($armor !== 0) {
+      echo "Armor : " . $armor . "\n";
+    }
+  }
+
+  private function handleMovement(string $direction)
   {
     $locationUpdated = $this->player->updateLocation($direction);
     if ($locationUpdated) {
+      $conflictingItem = $this->checkForConflict();
+      if ($conflictingItem) {
+        $conflictingItem->interactWith($this->player);
+        $this->map->destroyItem($conflictingItem);
+      }
+      $this->displayPlayerHealthPoints();
+      $this->displayPlayerArmor();
       $this->map->update($this->player);
     } else {
+      $this->displayPlayerHealthPoints();
+      $this->displayPlayerArmor();
       $this->map->render();
     }
     $this->askForMovement();
+  }
+
+  private function checkForConflict()
+  {
+    foreach ($this->items as $item) {
+      if ($item instanceof Player) {
+        continue;
+      }
+
+      if ($item->getCoordX() === $this->player->getCoordX() && $item->getCoordY() === $this->player->getCoordY()) {
+        return $item;
+      }
+    }
+    return false;
   }
 
   private function askForStart()

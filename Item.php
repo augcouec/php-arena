@@ -26,4 +26,14 @@ class Item
   {
     return $this->y;
   }
+
+  public function setCoordX(int $x)
+  {
+    $this->x = $x;
+  }
+
+  public function setCoordY(int $y)
+  {
+    $this->y = $y;
+  }
 }

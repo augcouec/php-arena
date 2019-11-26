@@ -53,4 +53,11 @@ class Map
     $this->grid[$player->getCoordX()][$player->getCoordY()] = $player->getSymbol();
     $this->render();
   }
+
+  public function destroyItem($item)
+  {
+    $item->setCoordX(-1);
+    $item->setCoordY(-1);
+    $this->grid[$item->getCoordX()][$item->getCoordY()] = "`";
+  }
 }
