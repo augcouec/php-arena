@@ -14,9 +14,10 @@ class Potion extends Item
   {
     $projection = $player->getHealthPoints() + self::HEAL;
     if ($projection > $player->getMaximumHealthPoints()) {
-      $player->setHealthPoints($player->getMaximumHealthPoints());
+      $difference = $player->getMaximumHealthPoints() - $player->getHealthPoints();
+      $player->addHealthPoints($difference);
     } else {
-      $player->setHealthPoints($projection);
+      $player->addHealthPoints(self::HEAL);
     }
   }
 }

@@ -9,6 +9,6 @@ class Enemy extends Item
 
   public function interactWith(Player $player)
   {
-    $player->setHealthPoints($player->getHealthPoints() - 30);
+    $player->removeHealthPoints(50);
   }
 }

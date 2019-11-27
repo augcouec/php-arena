@@ -69,12 +69,24 @@ class Player extends Item
     $this->armor = $armor;
   }
 
-  public function setHealthPoints(int $healthPoints)
+  public function addHealthPoints(int $heal)
   {
-    $this->currentHealthPoints = $healthPoints;
-    if ($this->armor > 0) {
-      $this->currentHealthPoints += $this->armor;
-      $this->armor = 0;
+    $this->currentHealthPoints += $heal;
+  }
+
+  public function removeHealthPoints(int $attack)
+  {
+    if ($this->armor >= $attack) {
+      $this->armor -= $attack;
+    } else {
+      $this->currentHealthPoints -= $attack;
+      if ($this->armor > 0) {
+        $this->currentHealthPoints += $this->armor;
+        $this->armor = 0;
+      }
+      if ($this->currentHealthPoints < 0) {
+        $this->currentHealthPoints = 0;
+      }
     }
   }
 

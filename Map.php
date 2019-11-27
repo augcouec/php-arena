@@ -56,8 +56,8 @@ class Map
 
   public function destroyItem($item)
   {
+    $this->grid[$item->getCoordX()][$item->getCoordY()] = "`";
     $item->setCoordX(-1);
     $item->setCoordY(-1);
-    $this->grid[$item->getCoordX()][$item->getCoordY()] = "`";
   }
 }

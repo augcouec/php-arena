@@ -2,8 +2,8 @@
 
 class Game
 {
-  const COLUMNS = 12;
-  const ROWS = 15;
+  const COLUMNS = 18;
+  const ROWS = 22;
   const ARMORS = 4;
   const POTIONS = 2;
   const ENEMIES_GROUPS = 3;
@@ -14,11 +14,19 @@ class Game
 
   public function start()
   {
+    $this->reset();
     $this->askForStart();
     $this->initItems();
     $this->displayPlayerHealthPoints();
     $this->initMap();
     $this->askForMovement();
+  }
+
+  private function reset()
+  {
+    $this->items = [];
+    $this->player = null;
+    $this->map = null;
   }
 
   private function initItems()
@@ -104,10 +112,19 @@ class Game
       if ($conflictingItem) {
         $conflictingItem->interactWith($this->player);
         $this->map->destroyItem($conflictingItem);
+        $this->deleteItem($conflictingItem);
       }
       $this->displayPlayerHealthPoints();
       $this->displayPlayerArmor();
       $this->map->update($this->player);
+      if (!$this->checkForEnemies()) {
+        echo "Vous avez gagné !" . "\n";
+        $this->start();
+      }
+      if ($this->player->getHealthPoints() <= 0) {
+        echo "Vous avez perdu !" . "\n";;
+        $this->start();
+      }
     } else {
       $this->displayPlayerHealthPoints();
       $this->displayPlayerArmor();
@@ -151,5 +168,24 @@ class Game
         "D key => right"
     );
     $this->handleMovement($key);
+  }
+
+  public function checkForEnemies()
+  {
+    foreach ($this->items as $item) {
+      if ($item instanceof Hunter || $item instanceof Mage || $item instanceof Warrior) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  public function deleteItem($item)
+  {
+    $index = array_search($item, $this->items);
+    if ($index) {
+      array_splice($this->items, $index, 1);
+    }
   }
 }
