@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Items\Bonuses;
+
+use App\Items\Item;
+use App\Items\Player;
+
 class Potion extends Item
 {
     const HEAL = 50;

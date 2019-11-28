@@ -1,5 +1,15 @@
 <?php
 
+namespace App;
+
+use App\Map;
+use App\Items\Player;
+use App\Items\Bonuses\Armor;
+use App\Items\Bonuses\Potion;
+use App\Items\Enemies\Hunter;
+use App\Items\Enemies\Mage;
+use App\Items\Enemies\Warrior;
+
 class Game
 {
     const COLUMNS = 12;

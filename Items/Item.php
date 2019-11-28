@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Items;
+
 abstract class Item
 {
     protected $x;

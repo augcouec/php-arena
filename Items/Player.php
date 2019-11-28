@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Items;
+
+use App\Items\Item;
+use App\Game;
+
 class Player extends Item
 {
     private $previousLocation;

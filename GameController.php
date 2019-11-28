@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+use App\Game;
+use App\ViewManagerCli;
+
 class GameController
 {
 

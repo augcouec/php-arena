@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+use App\Game;
+use App\Items\Player;
+
 interface ViewManager
 {
   static function askForMovement(Game $game);

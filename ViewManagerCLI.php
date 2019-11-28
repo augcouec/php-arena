@@ -1,5 +1,13 @@
 <?php
 
+namespace App;
+
+use App\ViewManager;
+use App\Game;
+use App\GameController;
+use App\CLIUtil;
+use App\Items\Player;
+
 class ViewManagerCli implements ViewManager
 {
     /**
@@ -27,7 +35,7 @@ class ViewManagerCli implements ViewManager
      */
     public static function askForStart()
     {
-        $start = CliUtil::getFromCli("Start a new game ? (yes/no)");
+        $start = CLIUtil::getFromCli("Start a new game ? (yes/no)");
 
         if ($start === 'no') {
             die;

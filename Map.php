@@ -1,5 +1,9 @@
 <?php
 
+namespace App;
+
+use App\Items\Player;
+
 class Map
 {
     private $grid;

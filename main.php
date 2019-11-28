@@ -1,6 +1,8 @@
 <?php
+require "vendor/autoload.php";
 
-include_once('bootstrap.php');
+use App\ViewManagerCli;
+use App\Game;
 
 ViewManagerCli::askForStart();
 $game = new Game();

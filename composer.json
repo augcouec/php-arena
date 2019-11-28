@@ -1,0 +1,10 @@
+{
+  "name": "augcouec/php-arena",
+  "description": "RPG Game",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "App\\": ""
+    }
+  }
+}

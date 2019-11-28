@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Items\Enemies;
+
+use App\Items\Enemies\Enemy;
+use App\Items\Player;
+
 class Warrior extends Enemy
 {
     /**

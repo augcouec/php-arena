@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Items\Enemies;
+
+use App\Items\Item;
+
 abstract class Enemy extends Item
 {
     /**

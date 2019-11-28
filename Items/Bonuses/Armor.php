@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Items\Bonuses;
+
+use App\Items\Item;
+use App\Items\Player;
+
 class Armor extends Item
 {
     const ARMOR = 20;
