@@ -20,7 +20,9 @@ Une potion (P) rend 50 points de vie au joueurs.
 **Types d'ennemis**
 
 Mage (M): Fait perdre 60 points de vie au joueur.
+
 Chasseur (H): Fait perdre 50 points de vie au joueur.
+
 Guerrier (W): Fait perdre 40 points de vie au joueur.
 
 ## But du jeu
