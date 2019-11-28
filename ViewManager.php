@@ -32,7 +32,7 @@ class ViewManager
         if ($start === 'no') {
             die;
         } elseif ($start !== 'yes') {
-            ViewManager::askForStart();
+            self::askForStart();
         }
     }
 
@@ -69,8 +69,8 @@ class ViewManager
      */
     public static function displayPlayerStats(Player $player)
     {
-        ViewManager::displayPlayerHealthPoints($player);
-        ViewManager::displayPlayerArmor($player);
+        self::displayPlayerHealthPoints($player);
+        self::displayPlayerArmor($player);
     }
 
     /**
