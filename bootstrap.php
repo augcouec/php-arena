@@ -3,6 +3,7 @@
 require_once('CLIUtil.php');
 require_once('GameController.php');
 require_once('ViewManager.php');
+require_once('ViewManagerCli.php');
 require_once('Game.php');
 require_once('Map.php');
 require_once('Items/Item.php');

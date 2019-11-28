@@ -21,12 +21,12 @@ class Game
     {
         $this->reset();
         if (!$firstStart) {
-            ViewManager::askForStart();
+            ViewManagerCli::askForStart();
         }
         $this->initItems();
-        ViewManager::displayPlayerStats($this->player);
+        ViewManagerCli::displayPlayerStats($this->player);
         $this->initMap();
-        ViewManager::askForMovement($this);
+        ViewManagerCli::askForMovement($this);
     }
 
     /**

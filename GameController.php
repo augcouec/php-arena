@@ -24,23 +24,23 @@ class GameController
                 $game->deleteItem($conflictingItem);
             }
 
-            ViewManager::displayPlayerStats($player);
+            ViewManagerCli::displayPlayerStats($player);
             $map->update($player);
 
             if (!$game->checkForEnemies()) {
-                ViewManager::displayWinMessage();
+                ViewManagerCli::displayWinMessage();
                 $game->start();
             }
 
             if ($player->getHealthPoints() <= 0) {
-                ViewManager::displayLoseMessage();
+                ViewManagerCli::displayLoseMessage();
                 $game->start();
             }
         } else {
-            ViewManager::displayPlayerStats($player);
+            ViewManagerCli::displayPlayerStats($player);
             $map->render();
         }
 
-        ViewManager::askForMovement($game);
+        ViewManagerCli::askForMovement($game);
     }
 }

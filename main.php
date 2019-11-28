@@ -2,7 +2,7 @@
 
 include_once('bootstrap.php');
 
-ViewManager::askForStart();
+ViewManagerCli::askForStart();
 $game = new Game();
 $game->start(true);
-ViewManager::askForMovement($game);
+ViewManagerCli::askForMovement($game);
