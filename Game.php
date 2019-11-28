@@ -2,8 +2,8 @@
 
 class Game
 {
-  const COLUMNS = 18;
-  const ROWS = 22;
+  const COLUMNS = 12;
+  const ROWS = 15;
   const ARMORS = 4;
   const POTIONS = 2;
   const ENEMIES_GROUPS = 3;
@@ -67,7 +67,7 @@ class Game
     ];
 
     if (!$this->isLocationAvailable($location)) {
-      $this->generateLocation();
+      $location = $this->generateLocation(true, $i);
     }
 
     return $location;
