@@ -7,4 +7,9 @@ class Hunter extends Enemy
     parent::__construct($location);
     $this->symbol = 'H';
   }
+
+  public function interactWith(Player $player)
+  {
+    $player->removeHealthPoints(50);
+  }
 }

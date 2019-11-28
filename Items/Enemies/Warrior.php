@@ -7,4 +7,9 @@ class Warrior extends Enemy
     parent::__construct($location);
     $this->symbol = 'W';
   }
+
+  public function interactWith(Player $player)
+  {
+    $player->removeHealthPoints(40);
+  }
 }

@@ -67,7 +67,7 @@ class Game
     ];
 
     if (!$this->isLocationAvailable($location)) {
-      $location = $this->generateLocation(true, $i);
+      $location = $this->generateLocation(true);
     }
 
     return $location;

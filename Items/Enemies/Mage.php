@@ -7,4 +7,9 @@ class Mage extends Enemy
     parent::__construct($location);
     $this->symbol = 'M';
   }
+
+  public function interactWith(Player $player)
+  {
+    $player->removeHealthPoints(60);
+  }
 }
