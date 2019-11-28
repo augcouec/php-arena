@@ -9,7 +9,12 @@ class Armor extends Item
     parent::__construct($location);
     $this->symbol = 'A';
   }
-
+/**
+ * interactWith
+ *
+ * @param Player $player
+ * @return void
+ */
   public function interactWith(Player $player)
   {
     $armor = $player->getArmor();

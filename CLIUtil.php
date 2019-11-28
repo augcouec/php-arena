@@ -8,7 +8,12 @@ class CLIUtil
   {
     self::$handler = fopen("php://stdin", "r");
   }
-
+/**
+ * getFromCli
+ *
+ * @param [type] $text
+ * @return void
+ */
   public static function getFromCli($text)
   {
     if (self::$handler === null) {

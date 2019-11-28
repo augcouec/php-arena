@@ -9,7 +9,12 @@ class Potion extends Item
     parent::__construct($location);
     $this->symbol = 'P';
   }
-
+/**
+ * interactWith
+ *
+ * @param Player $player
+ * @return void
+ */
   public function interactWith(Player $player)
   {
     $projection = $player->getHealthPoints() + self::HEAL;
