@@ -12,37 +12,38 @@ class Game
   private $player;
   private $map;
 
-/**
- * start
- *
- * @return void
- */
-
-  public function start()
+  /**
+   * start
+   *
+   * @return void
+   */
+  public function start(bool $firstStart = false)
   {
     $this->reset();
-    $this->askForStart();
+    if (!$firstStart) {
+      ViewManager::askForStart();
+    }
     $this->initItems();
-    $this->displayPlayerHealthPoints();
+    ViewManager::displayPlayerStats($this->player);
     $this->initMap();
-    $this->askForMovement();
+    ViewManager::askForMovement($this);
   }
-/**
- * reset
- *
- * @return void
- */
+  /**
+   * reset
+   *
+   * @return void
+   */
   private function reset()
   {
     $this->items = [];
     $this->player = null;
     $this->map = null;
   }
-/**
- * initItems
- *
- * @return void
- */
+  /**
+   * initItems
+   *
+   * @return void
+   */
   private function initItems()
   {
     $this->player = new Player([1, 1]);
@@ -79,11 +80,11 @@ class Game
     $this->map->render();
   }
 
-/**
- * generateLocation
- *
- * @return array
- */
+  /**
+   * generateLocation
+   *
+   * @return array
+   */
 
   private function generateLocation(): array
   {
@@ -99,12 +100,12 @@ class Game
     return $location;
   }
 
-/**
- * isLocationAvailable
- *
- * @param array $location
- * @return boolean
- */
+  /**
+   * isLocationAvailable
+   *
+   * @param array $location
+   * @return boolean
+   */
 
   public function isLocationAvailable(array $location): bool
   {
@@ -116,12 +117,12 @@ class Game
     return true;
   }
 
-/**
- * isLocationAllowed
- *
- * @param array $location
- * @return boolean
- */
+  /**
+   * isLocationAllowed
+   *
+   * @param array $location
+   * @return boolean
+   */
 
   public static function isLocationAllowed(array $location): bool
   {
@@ -131,75 +132,7 @@ class Game
     return false;
   }
 
-  /**
-   * displayPlayerHealthPoints
-   *
-   * @return void
-   */
-
-  private function displayPlayerHealthPoints()
-  {
-    echo "HP : " . $this->player->getHealthPoints() . "/" . $this->player->getMaximumHealthPoints() . "\n";
-  }
-
- /**
-  * displayPlayerArmor
-  *
-  * @return void
-  */
-
-  private function displayPlayerArmor()
-  {
-    $armor = $this->player->getArmor();
-    if ($armor !== 0) {
-      echo "Armor : " . $armor . "\n";
-    }
-  }
-
- /**
-  * handleMovement
-  *
-  * at every turn, check if there is an event at the new location,
-  * check also if the player have pv, if not set the game lost
-  *
-  * @param string $direction
-  * @return void
-  */
-
-  private function handleMovement(string $direction)
-  {
-    $locationUpdated = $this->player->updateLocation($direction);
-    if ($locationUpdated) {
-      $conflictingItem = $this->checkForConflict();
-      if ($conflictingItem) {
-        $conflictingItem->interactWith($this->player);
-        $this->map->destroyItem($conflictingItem);
-        $this->deleteItem($conflictingItem);
-      }
-      $this->displayPlayerHealthPoints();
-      $this->displayPlayerArmor();
-      $this->map->update($this->player);
-      if (!$this->checkForEnemies()) {
-        echo "Vous avez gagné !" . "\n";
-        $this->start();
-      }
-      if ($this->player->getHealthPoints() <= 0) {
-        echo "Vous avez perdu !" . "\n";;
-        $this->start();
-      }
-    } else {
-      $this->displayPlayerHealthPoints();
-      $this->displayPlayerArmor();
-      $this->map->render();
-    }
-    $this->askForMovement();
-  }
-/**
- * checkForConflict
- *
- * @return void
- */
-  private function checkForConflict()
+  public function checkForConflict()
   {
     foreach ($this->items as $item) {
       if ($item instanceof Player) {
@@ -214,46 +147,10 @@ class Game
   }
 
   /**
-   * askForStart
+   * checkForEnemies
    *
    * @return void
    */
-
-  private function askForStart()
-  {
-    $start = CliUtil::getFromCli("Start a new game ? (yes/no)");
-
-    if ($start === 'no') {
-      die;
-    } elseif ($start !== 'yes') {
-      $this->askForStart();
-    }
-  }
-
-/**
- * askForMovement(
- *
- * @return void
- */
-
-  private function askForMovement()
-  {
-    $key = CliUtil::getFromCli(
-      "Move your character : " . " \n" .
-        "Z key => up" . " \n" .
-        "S key => bottom" . " \n" .
-        "Q key => left" . " \n" .
-        "D key => right"
-    );
-    $this->handleMovement($key);
-  }
-
-/**
- * checkForEnemies
- *
- * @return void
- */
-
   public function checkForEnemies()
   {
     foreach ($this->items as $item) {
@@ -265,12 +162,12 @@ class Game
     return false;
   }
 
-/**
- * deleteItem(
- *
- * @param [type] $item
- * @return void
- */
+  /**
+   * deleteItem
+   *
+   * @param [type] $item
+   * @return void
+   */
 
   public function deleteItem($item)
   {
@@ -278,5 +175,15 @@ class Game
     if ($index) {
       array_splice($this->items, $index, 1);
     }
+  }
+
+  public function getMap(): Map
+  {
+    return $this->map;
+  }
+
+  public function getPlayer(): Player
+  {
+    return $this->player;
   }
 }
