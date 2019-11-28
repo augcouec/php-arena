@@ -4,17 +4,23 @@ class CLIUtil
 {
   private static $handler;
 
+  /**
+   * init
+   *
+   * @return void
+   */
   public static function init()
   {
     self::$handler = fopen("php://stdin", "r");
   }
-/**
- * getFromCli
- *
- * @param [type] $text
- * @return void
- */
-  public static function getFromCli($text)
+
+  /**
+   * getFromCli
+   *
+   * @param string $text
+   * @return void
+   */
+  public static function getFromCli(string $text)
   {
     if (self::$handler === null) {
       self::init();

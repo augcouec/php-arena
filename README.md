@@ -2,7 +2,7 @@
 
 ## Specs du jeu
 
-- Une carte de 8 unités de largeur et 10 unités de longueur
+- Une carte de 12 unités de largeur et 15 unités de longueur
 - 4 armures par carte
 - 2 potions par carte
 - 9 ennemis par carte (3 de chaque classe)
@@ -11,17 +11,17 @@
 
 **Armures**
 
-Une armure réduit les dégâts subis de 5 points.
+Une armure (A) réduit les dégâts subis de 5 points.
 
 **Potions**
 
-Une arme rend 50 points de vie au joueurs.
+Une potion (P) rend 50 points de vie au joueurs.
 
 **Types d'ennemis**
 
-Mage : Fait perdre 50 points de vie au joueur.
-Chasseur : Fait perdre 40 points de vie au joueur.
-Guerrier : Fait perdre 30 points de vie au joueur.
+Mage (M): Fait perdre 60 points de vie au joueur.
+Chasseur (H): Fait perdre 50 points de vie au joueur.
+Guerrier (W): Fait perdre 40 points de vie au joueur.
 
 ## But du jeu
 

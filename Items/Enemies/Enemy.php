@@ -2,7 +2,12 @@
 
 class Enemy extends Item
 {
-  function __construct($location)
+  /**
+   * __construct
+   *
+   * @param array $location
+   */
+  function __construct(array $location)
   {
     parent::__construct($location);
   }
