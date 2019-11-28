@@ -28,6 +28,7 @@ class Game
     $this->initMap();
     ViewManager::askForMovement($this);
   }
+
   /**
    * reset
    *
@@ -39,6 +40,7 @@ class Game
     $this->player = null;
     $this->map = null;
   }
+
   /**
    * initItems
    *
@@ -72,7 +74,6 @@ class Game
    *
    * @return void
    */
-
   private function initMap()
   {
     $this->map = new Map(self::COLUMNS, self::ROWS);
@@ -85,7 +86,6 @@ class Game
    *
    * @return array
    */
-
   private function generateLocation(): array
   {
     $location = [
@@ -106,7 +106,6 @@ class Game
    * @param array $location
    * @return boolean
    */
-
   public function isLocationAvailable(array $location): bool
   {
     foreach ($this->items as $item) {
@@ -123,7 +122,6 @@ class Game
    * @param array $location
    * @return boolean
    */
-
   public static function isLocationAllowed(array $location): bool
   {
     if (($location[0] > 0 && $location[0] < (self::ROWS - 3)) && ($location[1] > 0 && $location[1] < (self::COLUMNS + 3))) {
@@ -132,6 +130,11 @@ class Game
     return false;
   }
 
+  /**
+   * checkForConflict
+   *
+   * @return void
+   */
   public function checkForConflict()
   {
     foreach ($this->items as $item) {
@@ -168,7 +171,6 @@ class Game
    * @param [type] $item
    * @return void
    */
-
   public function deleteItem($item)
   {
     $index = array_search($item, $this->items);
@@ -177,11 +179,21 @@ class Game
     }
   }
 
+  /**
+   * getMap
+   *
+   * @return Map
+   */
   public function getMap(): Map
   {
     return $this->map;
   }
 
+  /**
+   * getPlayer
+   *
+   * @return Player
+   */
   public function getPlayer(): Player
   {
     return $this->player;

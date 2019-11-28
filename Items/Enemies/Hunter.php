@@ -2,12 +2,23 @@
 
 class Hunter extends Enemy
 {
-  function __construct($location)
+  /**
+   * __construct
+   *
+   * @param array $location
+   */
+  function __construct(array $location)
   {
     parent::__construct($location);
     $this->symbol = 'H';
   }
 
+  /**
+   * interactWith
+   *
+   * @param Player $player
+   * @return void
+   */
   public function interactWith(Player $player)
   {
     $player->removeHealthPoints(50);

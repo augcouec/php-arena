@@ -4,17 +4,23 @@ class Potion extends Item
 {
   const HEAL = 50;
 
-  function __construct($location)
+  /**
+   * __construct
+   *
+   * @param array $location
+   */
+  function __construct(array $location)
   {
     parent::__construct($location);
     $this->symbol = 'P';
   }
-/**
- * interactWith
- *
- * @param Player $player
- * @return void
- */
+
+  /**
+   * interactWith
+   *
+   * @param Player $player
+   * @return void
+   */
   public function interactWith(Player $player)
   {
     $projection = $player->getHealthPoints() + self::HEAL;
