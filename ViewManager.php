@@ -2,90 +2,90 @@
 
 class ViewManager
 {
-  /**
-   * askForMovement
-   *
-   * @param Game $game
-   * @return void
-   */
-  public static function askForMovement(Game $game)
-  {
-    $key = CliUtil::getFromCli(
-      "Move your character : " . " \n" .
-        "Z key => up" . " \n" .
-        "S key => bottom" . " \n" .
-        "Q key => left" . " \n" .
-        "D key => right"
-    );
-    GameController::newTurn($game, $key);
-  }
-
-  /**
-   * askForStart
-   *
-   * @return void
-   */
-  public static function askForStart()
-  {
-    $start = CliUtil::getFromCli("Start a new game ? (yes/no)");
-
-    if ($start === 'no') {
-      die;
-    } elseif ($start !== 'yes') {
-      $this->askForStart();
+    /**
+     * askForMovement
+     *
+     * @param Game $game
+     * @return void
+     */
+    public static function askForMovement(Game $game)
+    {
+        $key = CliUtil::getFromCli(
+            "Move your character : " . " \n" .
+                "Z key => up" . " \n" .
+                "S key => bottom" . " \n" .
+                "Q key => left" . " \n" .
+                "D key => right"
+        );
+        GameController::newTurn($game, $key);
     }
-  }
 
-  /**
-   * displayPlayerHealthPoints
-   *
-   * @param Player $player
-   * @return void
-   */
-  private function displayPlayerHealthPoints(Player $player)
-  {
-    echo "HP : " . $player->getHealthPoints() . "/" . $player->getMaximumHealthPoints() . "\n";
-  }
+    /**
+     * askForStart
+     *
+     * @return void
+     */
+    public static function askForStart()
+    {
+        $start = CliUtil::getFromCli("Start a new game ? (yes/no)");
 
-  /**
-   * displayPlayerArmor
-   *
-   * @param Player $player
-   * @return void
-   */
-  private function displayPlayerArmor(Player $player)
-  {
-    $armor = $player->getArmor();
-    if ($armor !== 0) {
-      echo "Armor : " . $armor . "\n";
+        if ($start === 'no') {
+            die;
+        } elseif ($start !== 'yes') {
+            ViewManager::askForStart();
+        }
     }
-  }
 
-  /**
-   * displayPlayerStats
-   *
-   * @param Player $player
-   * @return void
-   */
-  public static function displayPlayerStats(Player $player)
-  {
-    ViewManager::displayPlayerHealthPoints($player);
-    ViewManager::displayPlayerArmor($player);
-  }
+    /**
+     * displayPlayerHealthPoints
+     *
+     * @param Player $player
+     * @return void
+     */
+    private function displayPlayerHealthPoints(Player $player)
+    {
+        echo "HP : " . $player->getHealthPoints() . "/" . $player->getMaximumHealthPoints() . "\n";
+    }
 
-  /**
-   * displayLoseMessage
-   */
-  public static function displayLoseMessage()
-  {
-    echo "Vous avez perdu !" . "\n";
-  }
+    /**
+     * displayPlayerArmor
+     *
+     * @param Player $player
+     * @return void
+     */
+    private function displayPlayerArmor(Player $player)
+    {
+        $armor = $player->getArmor();
+        if ($armor !== 0) {
+            echo "Armor : " . $armor . "\n";
+        }
+    }
 
-  /**
-   * displayWinMessage
-   */
-  public static function displayWinMessage()
-  {
-    echo "Vous avez gagné !" . "\n";
-  }
+    /**
+     * displayPlayerStats
+     *
+     * @param Player $player
+     * @return void
+     */
+    public static function displayPlayerStats(Player $player)
+    {
+        ViewManager::displayPlayerHealthPoints($player);
+        ViewManager::displayPlayerArmor($player);
+    }
+
+    /**
+     * displayLoseMessage
+     */
+    public static function displayLoseMessage()
+    {
+        echo "Vous avez perdu !" . "\n";
+    }
+
+    /**
+     * displayWinMessage
+     */
+    public static function displayWinMessage()
+    {
+        echo "Vous avez gagné !" . "\n";
+    }
 }

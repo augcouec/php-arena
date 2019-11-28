@@ -2,32 +2,32 @@
 
 class CLIUtil
 {
-  private static $handler;
+    private static $handler;
 
-  /**
-   * init
-   *
-   * @return void
-   */
-  public static function init()
-  {
-    self::$handler = fopen("php://stdin", "r");
-  }
-
-  /**
-   * getFromCli
-   *
-   * @param string $text
-   * @return void
-   */
-  public static function getFromCli(string $text)
-  {
-    if (self::$handler === null) {
-      self::init();
+    /**
+     * init
+     *
+     * @return void
+     */
+    public static function init()
+    {
+        self::$handler = fopen("php://stdin", "r");
     }
 
-    echo $text . " \n";
+    /**
+     * getFromCli
+     *
+     * @param string $text
+     * @return string
+     */
+    public static function getFromCli(string $text): string
+    {
+        if (self::$handler === null) {
+            self::init();
+        }
 
-    return trim(fgets(self::$handler));
-  }
+        echo $text . " \n";
+
+        return trim(fgets(self::$handler));
+    }
 }
